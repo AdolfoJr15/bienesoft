@@ -29,7 +29,7 @@ builder.Services.AddScoped<AttendantServices>();
 
 builder.Services.AddScoped<ProgramServices>();
 
-builder.Services.AddScoped<DepartmentServices>();
+//builder.Services.AddScoped<DepartmentServices>();
 
 
 

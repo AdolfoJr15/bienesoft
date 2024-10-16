@@ -1,10 +1,11 @@
 ﻿using bienesoft.Funcions;
 using bienesoft.Models;
 using bienesoft.Services;
-using Bienesoft.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace bienesoft.Controllers
 {
@@ -15,6 +16,7 @@ namespace bienesoft.Controllers
         public IConfiguration _Configuration { get; set; }
         public GeneralFunction GeneralFunction;
         private readonly ApprenticeServices _ApprenticeServices;
+
 
         public ApprenticeController(IConfiguration configuration, ApprenticeServices apprenticeServices)
         {
@@ -28,17 +30,13 @@ namespace bienesoft.Controllers
             try
             {
                 _ApprenticeServices.AddApprendice(apprentice);
-                return Ok(new
-                {
-                    message = "Apprentice creado con exito"
-                });
+                return Ok(new { message = "Apprentice creado con éxito" });
             }
             catch (Exception ex)
             {
                 GeneralFunction.Addlog(ex.ToString());
                 return StatusCode(500, ex.ToString());
             }
-
         }
 
         [HttpGet("AllApprentice")]
@@ -55,23 +53,23 @@ namespace bienesoft.Controllers
                 var apprentice = _ApprenticeServices.GetById(id);
                 if (apprentice == null)
                 {
-                    return NotFound("No Se Encontró El Aprendiz");
+                    return NotFound("No se encontró el aprendiz");
                 }
                 return Ok(apprentice);
             }
             catch (Exception ex)
             {
-
                 GeneralFunction.Addlog(ex.Message);
                 return StatusCode(500, ex.ToString());
-
             }
         }
+
         [HttpPost("UpdateApprentice")]
         public IActionResult Update(int Id, Apprentice Aprendiz)
         {
             try
             {
+                // Aquí deberías implementar la lógica de actualización
                 return Ok();
             }
             catch (Exception ex)
@@ -80,6 +78,7 @@ namespace bienesoft.Controllers
                 return StatusCode(500, ex.ToString());
             }
         }
+
         [HttpDelete("DeleteApprentice")]
         public IActionResult Delete(int id)
         {
@@ -88,16 +87,16 @@ namespace bienesoft.Controllers
                 var apprentice = _ApprenticeServices.GetById(id);
                 if (apprentice == null)
                 {
-                    return NotFound("El Aprendiz Con El Id" + id + "No Se Pudo Encontrar");
+                    return NotFound($"El aprendiz con el ID {id} no se pudo encontrar");
                 }
                 _ApprenticeServices.Delete(id);
-                return Ok("Apprendice Eliminado Con Exito");
+                return Ok("Apprentice eliminado con éxito");
             }
             catch (KeyNotFoundException knFEx)
             {
                 return NotFound(knFEx.Message);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GeneralFunction.Addlog(ex.Message);
                 return StatusCode(500, ex.ToString());
@@ -129,11 +128,37 @@ namespace bienesoft.Controllers
             {
                 GeneralFunction.Addlog(ex.Message);
                 return StatusCode(500, ex.ToString());
-
             }
         }
 
+        [HttpGet("AllApprenticeInRange")]
+        public ActionResult<IEnumerable<Apprentice>> GetAllInRange(int Inicio, int Fin)
+        {
+            try
+            {
+                // Validar los parámetros
+                if (Inicio < 1 || Fin < Inicio)
+                {
+                    return BadRequest("Los parámetros de rango son inválidos.");
+                }
 
+                var apprentice = _ApprenticeServices.AllApprentice()
+                                                    .Skip(Inicio - 1)
+                                                    .Take(Fin - Inicio + 1)
+                                                    .ToList();
 
+                if (!apprentice.Any())
+                {
+                    return NotFound("No se encontraron aprendices en el rango especificado.");
+                }
+
+                return Ok(apprentice);
+            }
+            catch (Exception ex)
+            {
+                GeneralFunction.Addlog(ex.Message);
+                return StatusCode(500, ex.ToString());
+            }
+        }
     }
 }
