@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Bienesoft.Models;
 using bienesoft.Funcions;
+<<<<<<< HEAD
 using bienesoft.Services;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -39,11 +40,33 @@ namespace Bienesoft.Controllers
             catch (Exception ex)
             {
                 GeneralFunction.Addlog(ex.ToString());
+=======
+
+namespace Bienesoft.Controllers
+{
+    [Controller]
+    [Route("/api[controller]")]
+    public class departmentController : Controller
+    {
+        public GeneralFunction GeneralFunction;
+
+        [HttpPost("CreateDepartment")]
+        public IActionResult Create(departmentModel Department)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                GeneralFunction.Addlog(ex.Message);
+>>>>>>> 17e9e0a81495cdc9d950dce501677a7197442b84
                 return StatusCode(500, ex.ToString());
             }
         }
 
         [HttpGet("GetDepartment")]
+<<<<<<< HEAD
         public IActionResult GetDepartment(int id)
         {
             try
@@ -54,6 +77,41 @@ namespace Bienesoft.Controllers
                     return NotFound("No se encontró el departamento");
                 }
                 return Ok(department);
+=======
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                GeneralFunction.Addlog(ex.Message);
+                return StatusCode(500, ex.ToString());
+            }
+        }
+
+        [HttpGet("GetsDepartment")]
+        public IActionResult Gets(int id)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                GeneralFunction.Addlog(ex.Message);
+                return StatusCode(500, ex.ToString());
+            }
+        }
+
+        [HttpPost("UpdateDepartment")]
+        public IActionResult Update(int Id, departmentModel Department)
+        {
+            try
+            {
+                return Ok();
+>>>>>>> 17e9e0a81495cdc9d950dce501677a7197442b84
             }
             catch (Exception ex)
             {
@@ -67,6 +125,7 @@ namespace Bienesoft.Controllers
         {
             try
             {
+<<<<<<< HEAD
                 var department = _DepartmentServices.GetById(id);
                 if (department == null)
                 {
@@ -78,6 +137,9 @@ namespace Bienesoft.Controllers
             catch (KeyNotFoundException knFEx)
             {
                 return NotFound(knFEx.Message);
+=======
+                return Ok();
+>>>>>>> 17e9e0a81495cdc9d950dce501677a7197442b84
             }
             catch (Exception ex)
             {
@@ -86,6 +148,7 @@ namespace Bienesoft.Controllers
             }
         }
 
+<<<<<<< HEAD
         [HttpGet("AllDepartments")]
         public ActionResult<IEnumerable<Department>> GetDepartments()
         {
@@ -119,5 +182,8 @@ namespace Bienesoft.Controllers
                 return StatusCode(500, ex.ToString());
             }
         }
+=======
+
+>>>>>>> 17e9e0a81495cdc9d950dce501677a7197442b84
     }
 }
