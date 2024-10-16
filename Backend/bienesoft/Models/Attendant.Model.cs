@@ -1,15 +1,19 @@
-﻿namespace Bienesoft.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Bienesoft.Models
 {
-    public class AttendantModel
+    public class Attendant
     {
-        public int Id_Acudiente  { get; set; }
-        public string Nom_Acudiente { get; set; }
-        public string Ape_Acudienite { get; set; }
-        public int Tel_Acudienite { get; set; }
-        public string Dir_Acudienite { get; set; }
-        public string Cor_Acudiente { get; set; }
-        public int Eda_Acudiente { get; set; }
-
-
+            [Key]
+            public int Attendant_Id { get; set; }
+            public string Attendant_Name { get; set; }
+            public string Attendant_Surname { get; set; }
+            public int Attendant_Phone { get; set; }
+            public string Attendant_Address { get; set; }
+            public string Attendant_Email { get; set; }
+            public int Attendant_Age { get; set; }
     }
+
+
 }
+

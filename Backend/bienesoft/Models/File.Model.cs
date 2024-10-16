@@ -1,7 +1,10 @@
-﻿namespace bienesoft.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace bienesoft.Models
 {
     public class FileModel
     {
+        [Key]
         public int File_Id { get; set; }
 
         public int File_Number { get; set; }
