@@ -5,7 +5,7 @@ using Bienesoft.Models;
 namespace Bienesoft.Controllers
 {
     [Controller]
-    [Route("/api[controller]")]
+    [Route("api/[controller]")]
     public class DepartamentoController : Controller
     {
         [HttpPost]

@@ -1,30 +1,14 @@
-<<<<<<< HEAD
 import PublicNav from "@/components/navs/PublicNav";
-import Login from "@/components/views/user/Login";
+import LoginForm from "@/app/loginform/LoginForm";
 
-function LoginForm() {
+function Login() {
     return (
       <>
       <PublicNav/>
-      <Login/>   
-=======
-import CreateUser from "../createuser/CreateUser";
-import ResetPassword from "../resetpassword/ResetPassword";
-
-export default function login() {
-    return (
-      <>
-      <ResetPassword/>
-      <CreateUser/>   
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
-      </>
+      <LoginForm/>  
+      </> 
     );
-  
-    
-    
-<<<<<<< HEAD
+
   }
-  export default LoginForm;
-=======
-  }
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
+  export default Login;
+

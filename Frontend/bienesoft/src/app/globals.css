@@ -1,9 +1,6 @@
 :root {
-<<<<<<< HEAD
   --bg-color-primary: #ffffffda;
-=======
   --bg-color-primary: #f1f6f6;
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
   --bg-body: #0C2345;
   --btn-primario: #A1CEE4;
   --btn-text: #5297f7;
@@ -66,11 +63,7 @@ body {
   border-bottom: 2px solid var(--form-text);
 }
 
-<<<<<<< HEAD
-.btn {
-=======
-.button {
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
+.btn  {
   background-color: transparent;
   color: var(--form-text);
   border: solid 1px;
@@ -81,11 +74,7 @@ body {
   transition: background-color 0.3s;
 }
 
-<<<<<<< HEAD
-.btn:hover {
-=======
 .button:hover {
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
   background-color: var(--form-text);
   color: var(--bg-color-primary);
 }
@@ -93,7 +82,6 @@ body {
 /* Estilos del formulario de inicio de sesión */
 .login-form {
   background-color: var(--bg-color-primary);
-  border: 1px solid var(--bg-color-primary); /* Borde sencillo */
   border-radius: 8px;
   box-shadow: 0 4px 8px var(--form-text); /* Sombra suave */
   padding: 20px;
@@ -124,9 +112,19 @@ body {
   align-items: center;
   margin-bottom: 10px;
 }
+/* Estilos del formulario de inicio de sesión */
+.login-form {
+  background-color: var(--bg-color-primary);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--form-text)(0, 0, 0, 0.1); /* Sombra más clara */
+  padding: 20px;
+  max-width: 400px;
+  margin-top: 150px;
+  text-align: center;
+}
 
 
-.form-email,
+.form-email ,
 .form-password {
   border: 1px solid var(--form-text);
   border-radius: 5px;
@@ -177,7 +175,7 @@ body {
   color:var(--btn-text);
 }
 
-<<<<<<< HEAD
+
 /* Estilos generales para el formulario */
 .create-user-form {
   max-width: 600px;
@@ -334,55 +332,51 @@ p {
   text-decoration: underline;
 }
 
-.container {
-  display: flex;
-  position: relative; /* Asegura que el contenedor tenga una posición relativa */
+
+body {
+  background-color: var(--bg-color-primary);
 }
 
-.sidebar {
-  width: 200px; /* Ancho del sidebar */
-  background-color: var(--btn-text); /* Color de fondo */
-  color: var(--form-text); /* Color de texto */
-  position: fixed; /* Fijo a la izquierda */
-  left: -200px; /* Oculto por defecto */
-  transition: left 0.3s; /* Transición suave */
-  padding: 15px; /* Espaciado interno */
-  height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+.bg-dark {
+  background-color: var(--btn-text) !important;
 }
 
-.sidebar.open {
-  left: 0; /* Mostrar el sidebar */
+.nav-link {
+  color: var(--bg-body);
+  transition: color 0.3s ease;
 }
 
-.sidebar a {
-  color: var(--form-text); /* Color de los enlaces */
-  text-decoration: none; /* Sin subrayado */
-  display: block; /* Enlaces en bloque */
-  margin: 10px 10px; /* Margen entre enlaces */
-  padding: 15px;
-}
-
-.sidebar a:hover {
-  text-decoration: underline;
+.nav-link:hover {
   color: var(--bg-color-primary);
+  background-color:var(--form-text)(255, 255, 255, 0.1);
 }
 
-.toggle-button {
-  margin: 100px; /* Margen para el botón */
-  background-color: var(--btn-text); /* Color del botón */
-  color: var(--form-text); /* Color del texto del botón */
-  border: none; /* Sin borde */
-  padding: 10px; /* Espaciado interno */
-  cursor: pointer; /* Cursor de puntero */
-  font-size: 24px; /* Tamaño de fuente */
+.nav-item {
+  width: 100%;
+}
+
+.collapse {
+  transition: max-height 0.3s ease;
+}
+
+.dropdown-menu {
+  background-color: var(--btn-text);
+}
+
+.dropdown-item {
+  color: var(--form-text);
+}
+
+.dropdown-item:hover {
+  background-color: var(--form-text)(255, 255, 255, 0.1);
+}
+
+.dropdown-divider {
+  border-color: var(--btn-text)(255, 255, 255, 0.1);
 }
 
 
 
-
-
-=======
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
 
 
 

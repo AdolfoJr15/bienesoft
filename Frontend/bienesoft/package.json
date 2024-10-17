@@ -10,21 +10,13 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-<<<<<<< HEAD
     "next": "14.2.9",
-=======
-    "next": "14.2.11",
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
     "react": "^18",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18"
   },
   "devDependencies": {
     "eslint": "^8",
-<<<<<<< HEAD
     "eslint-config-next": "14.2.9"
-=======
-    "eslint-config-next": "14.2.11"
->>>>>>> 11db6f84dfa10aeedef9a063d05a13c653362a53
   }
 }

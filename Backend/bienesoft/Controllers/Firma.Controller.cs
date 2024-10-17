@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bienesoft.Controllers
 {
 	[Controller]
-	[Route("/api[controller]")]
+	[Route("api/[controller]")]
 	public class FirmaController : Controller
 	{
 		[HttpPost]

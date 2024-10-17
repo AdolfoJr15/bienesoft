@@ -1,10 +1,12 @@
-﻿namespace Bienesoft.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Bienesoft.Models
 {
-    public class ProgramModel
-    { 
-        public int Id_Programa { get; set; }
-        public string Nom_Programa  { get; set; }
-        public int Id_Ficha { get; set; }
+    public class Program
+    {
+        public int Program_Id { get; set; }
+        public string Program_Name  { get; set; }
+        public int File_Id { get; set; }
 
     }
 }

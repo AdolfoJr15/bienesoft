@@ -10,7 +10,7 @@ function PublicNav() {
                         <a href="">¿Quiénes Somos?</a>
                         <a href="">Sobre Mí</a>
                         <a href="">Manual de Usuario</a>
-                        <a className="button" href="./page.jsx" >Ingresar</a>
+                        <a className="button" href="loginform" >Ingresar</a>
                     </div>
                 </div>
             </nav>
