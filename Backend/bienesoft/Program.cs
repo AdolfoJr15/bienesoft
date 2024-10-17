@@ -1,5 +1,9 @@
 using bienesoft.Models;
 using bienesoft.Services;
+<<<<<<< HEAD
+=======
+using Bienesoft.Services;
+>>>>>>> 64461c392736522cbfe87334807d176ce0a35131
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,7 +30,13 @@ builder.Services.AddScoped<PermissionServices>();
 
 builder.Services.AddScoped<AttendantServices>();
 
+<<<<<<< HEAD
 //builder.Services.AddScoped<ProgramServices>();
+=======
+builder.Services.AddScoped<ProgramServices>();
+
+//builder.Services.AddScoped<DepartmentServices>();
+>>>>>>> 64461c392736522cbfe87334807d176ce0a35131
 
 
 

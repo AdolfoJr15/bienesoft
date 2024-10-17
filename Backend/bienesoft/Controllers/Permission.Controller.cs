@@ -1,39 +1,38 @@
+﻿using bienesoft.Funcions;
+using bienesoft.Models;
+using bienesoft.Services;
+using Bienesoft.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Bienesoft.Models;
-using bienesoft.Funcions;
-using bienesoft.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using bienesoft.Models;
 
-namespace Bienesoft.Controllers
+namespace bienesoft.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class AreaController : Controller
+    [Route("Api/[controller]")]
+    public class PermissionController : Controller
     {
         public IConfiguration _Configuration { get; set; }
         public GeneralFunction GeneralFunction;
-        private readonly AreaServices _AreaServices;
-<<<<<<< HEAD
+        private readonly PermissionServices _PermissionServices;
 
-=======
-       
->>>>>>> 64461c392736522cbfe87334807d176ce0a35131
-        public AreaController(IConfiguration configuration, AreaServices areaServices)
+        public PermissionController(IConfiguration configuration, PermissionServices PermissionServices)
         {
             _Configuration = configuration;
-            _AreaServices = areaServices;
+            _PermissionServices = PermissionServices;
         }
-        [HttpPost("CreateArea")]
-        public IActionResult AddArea(Area area)
+
+
+        [HttpPost("CreatePermission")]
+        public IActionResult AddPermission(Permission permission)
         {
             try
             {
-                _AreaServices.AddArea(area);
+                _PermissionServices.AddPermission(permission);
                 return Ok(new
                 {
-                    message = "Area creado con exito"
+                    message = "Permission creado con exito"
                 });
             }
             catch (Exception ex)
@@ -41,20 +40,19 @@ namespace Bienesoft.Controllers
                 GeneralFunction.Addlog(ex.ToString());
                 return StatusCode(500, ex.ToString());
             }
-
         }
 
-        [HttpGet("GetArea")]
-        public IActionResult GetArea(int id)
+        [HttpGet("GetPermission")]
+        public IActionResult GetPermission(int id)
         {
             try
             {
-                var area = _AreaServices.GetById(id);
-                if (area == null)
+                var permission = _PermissionServices.GetById(id);
+                if (permission == null)
                 {
-                    return NotFound("No Se Encontr� El Area");
+                    return NotFound("No Se Encontró El Permission");
                 }
-                return Ok(area);
+                return Ok(permission);
             }
             catch (Exception ex)
             {
@@ -64,9 +62,8 @@ namespace Bienesoft.Controllers
 
             }
         }
-
-        [HttpPost("UpdateArea")]
-        public IActionResult Update(int Id, Area area)
+        [HttpPost("UpdatePermission")]
+        public IActionResult Update(int Id, Permission permission )
         {
             try
             {
@@ -78,19 +75,18 @@ namespace Bienesoft.Controllers
                 return StatusCode(500, ex.ToString());
             }
         }
-
-        [HttpDelete("DeleteArea")]
+        [HttpDelete("DeletePermission")]
         public IActionResult Delete(int id)
         {
             try
             {
-                var area = _AreaServices.GetById(id);
-                if (area == null)
+                var permission = _PermissionServices.GetById(id);
+                if (permission == null)
                 {
-                    return NotFound("El Area Con El Id" + id + "No Se Pudo Encontrar");
+                    return NotFound("El Permission Con El Id" + id + "No Se Pudo Encontrar");
                 }
-                _AreaServices.Delete(id);
-                return Ok("Area Eliminado Con Exito");
+                _PermissionServices.Delete(id);
+                return Ok("Permission Eliminado Con Exito");
             }
             catch (KeyNotFoundException knFEx)
             {
@@ -102,24 +98,23 @@ namespace Bienesoft.Controllers
                 return StatusCode(500, ex.ToString());
             }
         }
-
-        [HttpGet("AllArea")]
-        public ActionResult<IEnumerable<Area>> GetArea()
+        [HttpGet("AllPermission")]
+        public ActionResult<IEnumerable<Permission>> GetPermission()
         {
-            return Ok(_AreaServices.GetArea());
+            return Ok(_PermissionServices.GetPermission());
         }
-        [HttpPut("UpdateArea")]
-        public IActionResult Update(Area area)
+        [HttpPut("UpdatePermission")]
+        public IActionResult Update(Permission permission)
         {
-            if (area == null)
+            if (permission == null)
             {
-                return BadRequest("El modelo de Area es nulo");
+                return BadRequest("El modelo de Permission es nulo");
             }
 
             try
             {
-                _AreaServices.UpdateArea(area);
-                return Ok("Area actualizado exitosamente");
+                _PermissionServices.UpdatePermission(permission);
+                return Ok("Permission actualizado exitosamente");
             }
             catch (ArgumentNullException ex)
             {
@@ -136,7 +131,6 @@ namespace Bienesoft.Controllers
 
             }
         }
-
 
 
     }

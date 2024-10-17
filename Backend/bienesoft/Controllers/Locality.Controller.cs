@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Bienesoft.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Bienesoft.Controllers
+namespace bienesoft.Controllers
 {
     [Controller]
-    [Route("api/[controller]")]
-    public class DepartamentoController : Controller
+    [Route("/api[controller]")]
+    public class Locality : Controller
     {
         [HttpPost]
-        public IActionResult Create(DepartamentoModel Departamento)
+        public IActionResult Create(Locality locality)
         {
             try
             {
@@ -20,8 +18,8 @@ namespace Bienesoft.Controllers
                 return StatusCode(500, ex.ToString());
             }
         }
-        [HttpGet("read")]
-        public IActionResult Read()
+        [HttpGet("GetLocality")]
+        public IActionResult create()
         {
             try
             {
@@ -32,7 +30,7 @@ namespace Bienesoft.Controllers
                 return StatusCode(500, ex.ToString());
             }
         }
-        [HttpPost("Update")]
+        [HttpPost("UpdateLocality")]
 
         public IActionResult Update()
         {
@@ -46,7 +44,7 @@ namespace Bienesoft.Controllers
             }
 
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("DeleteLocality")]
         public IActionResult Delete()
         {
             try

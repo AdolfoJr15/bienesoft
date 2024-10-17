@@ -1,6 +1,6 @@
 ﻿namespace Bienesoft.Models
 {
-    public class FirmaModel
+    public class signatureModel
     {
         public int Signature_Id { get; set; }
         public string Signature_Learner { get; set; }

@@ -65,12 +65,15 @@ namespace bienesoft.Services
 
             _context.SaveChanges();
         }
+<<<<<<< HEAD
         public IEnumerable<Attendant> GetAttendantsByCriteria(string criteria)
         {
             return _context.attendant
                 .Where(a => a.Attendant_Name.Contains(criteria)) // Puedes modificar esta línea según el criterio
                 .ToList();
         }
+=======
+>>>>>>> 64461c392736522cbfe87334807d176ce0a35131
 
     }
 }

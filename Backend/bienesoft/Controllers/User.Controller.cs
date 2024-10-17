@@ -63,12 +63,13 @@ namespace bienesoft.Controllers
         {
             try
             {
-                // Implementa aquí la lógica para enviar el correo de restablecimiento de contraseña
-                // Ejemplo: await EnviarCorreoRestablecimiento(user.Email);
-                // Reemplaza con tu implementación real
-                // ...
-
-                return Ok("Correo de restablecimiento de contraseña enviado correctamente.");
+                GeneralFunction function = new GeneralFunction(_configuration);
+                var response = await function.SendEmail(user.Email);
+                if (response != null)
+                {
+                    return Ok(response);
+                }
+                return BadRequest(response);
             }
             catch (Exception ex)
             {
@@ -82,9 +83,6 @@ namespace bienesoft.Controllers
         {
             try
             {
-                // Implementa aquí la lógica para crear un usuario
-                // ...
-
                 return Ok("Usuario creado correctamente.");
             }
             catch (Exception ex)

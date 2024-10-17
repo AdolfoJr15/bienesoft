@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "38UgH2XsLFM=",
+=======
+  "dgSpecHash": "PmVO+SfIKAs=",
+>>>>>>> 64461c392736522cbfe87334807d176ce0a35131
   "success": true,
   "projectFilePath": "C:\\ADSO 2024\\bienesoft\\Backend\\bienesoft\\bienesoft.csproj",
   "expectedPackageFiles": [

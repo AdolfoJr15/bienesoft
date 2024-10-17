@@ -132,6 +132,7 @@ namespace Bienesoft.Controllers
 
             }
         }
+<<<<<<< HEAD
         [HttpGet("search")]
         public IActionResult SearchAttendants(string criteria)
         {
@@ -142,6 +143,8 @@ namespace Bienesoft.Controllers
             }
             return Ok(attendants);
         }
+=======
+>>>>>>> 64461c392736522cbfe87334807d176ce0a35131
 
 
 

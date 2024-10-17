@@ -13,7 +13,12 @@ namespace bienesoft.Models
         public DbSet<Area> area { get; set; }
         public DbSet<Permission> permission { get; set; }
         public DbSet<Attendant> attendant { get; set; }
+<<<<<<< HEAD
         //public DbSet<Program> program { get; set; }
+=======
+        public DbSet<ProgramModel> program { get; set; }
+        public DbSet<Department> department { get; set; }
+>>>>>>> 64461c392736522cbfe87334807d176ce0a35131
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
