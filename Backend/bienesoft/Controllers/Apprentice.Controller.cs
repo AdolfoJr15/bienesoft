@@ -25,7 +25,7 @@ namespace bienesoft.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult AddApprendice(Apprentice apprentice)
+        public IActionResult AddApprendice(Responsible apprentice)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace bienesoft.Controllers
         }
 
         [HttpGet("AllApprentice")]
-        public ActionResult<IEnumerable<Apprentice>> AllApprentice()
+        public ActionResult<IEnumerable<Responsible>> AllApprentice()
         {
             return Ok(_ApprenticeServices.AllApprentice());
         }
@@ -97,7 +97,7 @@ namespace bienesoft.Controllers
         }
 
         [HttpPut("UpdateApprentice")]
-        public IActionResult Update(Apprentice apprentice)
+        public IActionResult Update(Responsible apprentice)
         {
             if (apprentice == null)
             {
@@ -125,7 +125,7 @@ namespace bienesoft.Controllers
         }
 
         [HttpGet("AllApprenticeInRange")]
-        public ActionResult<IEnumerable<Apprentice>> GetAllInRange(int Inicio, int Fin)
+        public ActionResult<IEnumerable<Responsible>> GetAllInRange(int Inicio, int Fin)
         {
             try
             {

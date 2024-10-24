@@ -32,6 +32,7 @@ builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<ProgramServices>();
 builder.Services.AddScoped<DepartmentServices>();
 builder.Services.AddScoped<LocalityServices>();
+builder.Services.AddScoped<ResponsibleServices>();
 
 
 

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace bienesoft.Models
 {
-    public class Apprentice
+    public class Responsible
     {
         [Key]
         public int Apprentice_Id { get; set; }

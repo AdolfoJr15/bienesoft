@@ -9,7 +9,7 @@ namespace bienesoft.Models
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         //Agrega tus DbSet para las entidades
-        public DbSet<Apprentice> apprentice { get; set; }
+        public DbSet<Responsible> apprentice { get; set; }
         public DbSet<FileModel> file { get; set; }
         public DbSet<Area> area { get; set; }
         public DbSet<Permission> permission { get; set; }
@@ -18,6 +18,7 @@ namespace bienesoft.Models
         public DbSet<User> user { get; set; }
         public DbSet<Department>department { get; set; }
         public DbSet<Locality> locality { get; set; }
+        public DbSet<Responsible> Responsible { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

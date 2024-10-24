@@ -359,3 +359,14 @@ C:\Users\SENA\source\repos\Bienesoft\bienesoft\bienesoft\Backend\bienesoft\obj\D
 C:\Users\SENA\source\repos\Bienesoft\bienesoft\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.pdb
 C:\Users\SENA\source\repos\Bienesoft\bienesoft\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.genruntimeconfig.cache
 C:\Users\SENA\source\repos\Bienesoft\bienesoft\bienesoft\Backend\bienesoft\obj\Debug\net8.0\ref\bienesoft.dll
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.csproj.AssemblyReference.cache
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.GeneratedMSBuildEditorConfig.editorconfig
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.AssemblyInfoInputs.cache
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.AssemblyInfo.cs
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.csproj.CoreCompileInputs.cache
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.MvcApplicationPartsAssemblyInfo.cs
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.MvcApplicationPartsAssemblyInfo.cache
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.sourcelink.json
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.dll
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\refint\bienesoft.dll
+C:\API PROYECTO\bienesoft\Backend\bienesoft\obj\Debug\net8.0\bienesoft.pdb

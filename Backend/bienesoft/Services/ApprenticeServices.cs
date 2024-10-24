@@ -10,16 +10,16 @@ namespace bienesoft.Services
         {
             _context = context;
         }
-        public IEnumerable<Apprentice> AllApprentice() 
+        public IEnumerable<Responsible> AllApprentice() 
         { 
             return _context.apprentice.ToList();
         }
-        public void AddApprendice(Apprentice apprentice)
+        public void AddApprendice(Responsible apprentice)
         { 
             _context.apprentice.Add(apprentice);
             _context.SaveChanges();
         }
-        public Apprentice GetById(int id)
+        public Responsible GetById(int id)
         {
             return _context.apprentice.FirstOrDefault(p => p.Apprentice_Id == id);
         }
@@ -43,11 +43,11 @@ namespace bienesoft.Services
                 throw new KeyNotFoundException("El Apprentice Con El Id" + id + "No Se Pudo Encontrar");
             }
         }
-        public void UpdateApprentice(Apprentice apprentice)
+        public void UpdateApprentice(Responsible apprentice)
         {
             if (apprentice == null)
             {
-                throw new ArgumentNullException(nameof(Apprentice), "El modelo de Apprentice es nulo");
+                throw new ArgumentNullException(nameof(Responsible), "El modelo de Apprentice es nulo");
             }
 
             var existingApprentice = _context.apprentice.Find(apprentice.Apprentice_Id);
@@ -61,7 +61,7 @@ namespace bienesoft.Services
 
             _context.SaveChanges();
         }
-        public IEnumerable<Apprentice> GetApprenticeByCriteria(string criteria)
+        public IEnumerable<Responsible> GetApprenticeByCriteria(string criteria)
         {
             return _context.apprentice
                 .Where(a => a.Apprentice_Name.Contains(criteria)) // Puedes modificar esta línea según el criterio
