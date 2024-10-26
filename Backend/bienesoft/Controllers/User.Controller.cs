@@ -1,7 +1,238 @@
-﻿using bienesoft.Funcions;
+﻿//using bienesoft.Funcions;
+//using bienesoft.models;
+//using bienesoft.Models;
+//using bienesoft.Services;
+//using Microsoft.AspNetCore.Authorization; // Añadir esto
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.Extensions.Configuration;
+//using Microsoft.IdentityModel.Tokens;
+//using System.IdentityModel.Tokens.Jwt;
+//using System.Security.Claims;
+//using System.Text;
+//using System.Threading.Tasks;
+
+//namespace bienesoft.Controllers
+
+
+//{
+//    [ApiController]
+//    [Route("api/[controller]")]
+//    public class UserController : Controller
+//    {
+//        private readonly IConfiguration _configuration;
+//        private readonly JWTModels _jwtSettings;
+//        private readonly UserServices _UserServices;
+//        public GeneralFunction GeneralFunction;
+
+//        public UserController(IConfiguration configuration, UserServices userServices)
+//        {
+//            _configuration = configuration;
+//            _jwtSettings = configuration.GetSection("JWT").Get<JWTModels>();
+//            _UserServices = userServices;
+//            GeneralFunction = new GeneralFunction(_configuration); // Inicializa GeneralFunction aquí
+//        }
+
+//        [HttpPost("Login")]
+//        public IActionResult Login(LoginUser login)
+//        {
+//            try
+//            {
+//                var user = _UserServices.GetByEmailAsync(login.Email).Result;
+//                if (user == null || !BCrypt.Net.BCrypt.Verify(login.HashedPassword + user.Salt, user.HashedPassword))
+//                {
+//                    return Unauthorized("Credenciales incorrectas.");
+//                }
+
+//                var key = Encoding.UTF8.GetBytes(_jwtSettings.keysecret);
+//                var claims = new ClaimsIdentity(new[]
+//                {
+//            new Claim("User", user.Email)
+//                 });
+
+//                var tokenDescriptor = new SecurityTokenDescriptor
+//                {
+//                    Subject = claims,
+//                    Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_jwtSettings.JWTExpireTime)),
+//                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+//                };
+
+//                var token = new JwtSecurityTokenHandler().CreateToken(tokenDescriptor);
+//                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+//                user.TokJwt = tokenString;
+//                _UserServices.UpdateUserAsync(user).Wait();
+
+//                return Ok(new { token = tokenString });
+//            }
+//            catch (Exception ex)
+//            {
+//                GeneralFunction.Addlog(ex.ToString());
+//                return StatusCode(500, "Ocurrió un error en el servidor.");
+//            }
+//        }
+
+
+//        //[Authorize] // Protección de la ruta con JWT
+//        //[HttpGet("ProtectedRoute")]
+//        //public IActionResult ProtectedRoute()
+//        //{
+//        //    var userEmail = User.FindFirstValue(ClaimTypes.NameIdentifier); // Obtener el usuario desde el token
+//        //    return Ok(new { message = $"Bienvenido, {userEmail}" });
+//        //}
+
+//        // Método para restablecer la contraseña (sin protección JWT)
+//        [HttpPost("ResetPassUser")]
+//        public async Task<IActionResult> ResetPassword(ResetPassUser user)
+//        {
+//            try
+//            {
+//                var userExists = await _UserServices.UserByEmail(user.Email);
+//                if (!userExists)
+//                {
+//                    return NotFound("El correo electrónico no está registrado.");
+//                }
+
+//                var emailResponse = await GeneralFunction.SendEmail(user.Email);
+//                if (!emailResponse.Status)
+//                {
+//                    return BadRequest(emailResponse.Message);
+//                }
+
+//                return Ok("Correo de restablecimiento de contraseña enviado correctamente.");
+//            }
+//            catch (Exception ex)
+//            {
+//                GeneralFunction.Addlog(ex.ToString());
+//                return StatusCode(500, ex.ToString());
+//            }
+//        }
+
+//        // Este método de crear usuario es público
+//        [AllowAnonymous]
+//        [HttpPost("CreateUser")]
+//        public async Task<IActionResult> CreateUser(User user)
+//        {
+//            try
+//            {
+//                string salt = BCrypt.Net.BCrypt.GenerateSalt();
+//                user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(user.HashedPassword + salt);
+//                user.Salt = salt;
+//                user.TokJwt = "";
+
+//                await _UserServices.AddUserAsync(user);
+//                return Ok(new { message = "Usuario creado con éxito" });
+//            }
+//            catch (Exception ex)
+//            {
+//                GeneralFunction.Addlog(ex.ToString());
+//                return StatusCode(500, ex.ToString());
+//            }
+//        }
+
+//        [Authorize] // Protección con JWT
+//        [HttpGet("AllUsers")]
+//        public async Task<ActionResult<IEnumerable<User>>> AllUsers()
+//        {
+//            var users = await _UserServices.AllUsersAsync();
+//            return Ok(users);
+//        }
+
+//        [Authorize] // Protección con JWT
+//        [HttpGet("GetUser/{id}")]
+//        public async Task<IActionResult> GetUser(int id)
+//        {
+//            try
+//            {
+//                var user = await _UserServices.GetByIdAsync(id);
+//                if (user == null)
+//                {
+//                    return NotFound("No se encontró el usuario");
+//                }
+//                return Ok(user);
+//            }
+//            catch (Exception ex)
+//            {
+//                GeneralFunction.Addlog(ex.Message);
+//                return StatusCode(500, ex.ToString());
+//            }
+//        }
+
+//        [Authorize] // Protección con JWT
+//        [HttpDelete("DeleteUser/{id}")]
+//        public async Task<IActionResult> Delete(int id)
+//        {
+//            try
+//            {
+//                var userToDelete = await _UserServices.GetByIdAsync(id);
+//                if (userToDelete == null)
+//                {
+//                    return NotFound($"El usuario con el ID {id} no se pudo encontrar");
+//                }
+//                await _UserServices.DeleteAsync(id);
+//                return Ok("Usuario eliminado con éxito");
+//            }
+//            catch (Exception ex)
+//            {
+//                GeneralFunction.Addlog(ex.Message);
+//                return StatusCode(500, ex.ToString());
+//            }
+//        }
+
+//        [Authorize] // Protección con JWT
+//        [HttpPut("UpdateUser")]
+//        public async Task<IActionResult> Update(User user)
+//        {
+//            if (user == null)
+//            {
+//                return BadRequest("El modelo de usuario es nulo");
+//            }
+
+//            try
+//            {
+//                await _UserServices.UpdateUserAsync(user);
+//                return Ok("Usuario actualizado exitosamente");
+//            }
+//            catch (Exception ex)
+//            {
+//                GeneralFunction.Addlog(ex.Message);
+//                return StatusCode(500, ex.ToString());
+//            }
+//        }
+
+//        [Authorize] // Protección con JWT
+//        [HttpGet("AllUsersInRange")]
+//        public async Task<ActionResult<IEnumerable<User>>> GetAllInRange(int inicio, int fin)
+//        {
+//            try
+//            {
+//                if (inicio < 1 || fin < inicio)
+//                {
+//                    return BadRequest("Los parámetros de rango son inválidos.");
+//                }
+
+//                var usersInRange = await _UserServices.AllUsersAsync();
+//                var paginatedUsers = usersInRange.Skip(inicio - 1).Take(fin - inicio + 1).ToList();
+
+//                if (!paginatedUsers.Any())
+//                {
+//                    return NotFound("No se encontraron usuarios en el rango especificado.");
+//                }
+
+//                return Ok(paginatedUsers);
+//            }
+//            catch (Exception ex)
+//            {
+//                GeneralFunction.Addlog(ex.Message);
+//                return StatusCode(500, ex.ToString());
+//            }
+//        }
+//    }
+//}
+using bienesoft.Funcions;
 using bienesoft.models;
 using bienesoft.Models;
 using bienesoft.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -26,32 +257,40 @@ namespace bienesoft.Controllers
             _configuration = configuration;
             _jwtSettings = configuration.GetSection("JWT").Get<JWTModels>();
             _UserServices = userServices;
-            GeneralFunction = new GeneralFunction(_configuration); // Inicializa GeneralFunction aquí
+            GeneralFunction = new GeneralFunction(_configuration);
         }
 
         [HttpPost("Login")]
-        public IActionResult Create(User user)
+        public IActionResult Login(LoginUser login)
         {
             try
             {
+                var user = _UserServices.GetByEmailAsync(login.Email).Result;
+                if (user == null || !BCrypt.Net.BCrypt.Verify(login.HashedPassword + user.Salt, user.HashedPassword))
+                {
+                    return Unauthorized("Credenciales incorrectas.");
+                }
+
                 var key = Encoding.UTF8.GetBytes(_jwtSettings.keysecret);
-                ClaimsIdentity subject = new ClaimsIdentity(new Claim[]
+                var claims = new ClaimsIdentity(new[]
                 {
                     new Claim("User", user.Email)
                 });
 
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = subject,
+                    Subject = claims,
                     Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_jwtSettings.JWTExpireTime)),
-                    SigningCredentials = new SigningCredentials(
-                        new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature
-                    )
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
                 var token = new JwtSecurityTokenHandler().CreateToken(tokenDescriptor);
-                return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+                user.TokJwt = tokenString;
+                _UserServices.UpdateUserAsync(user).Wait();
+
+                return Ok(new { token = tokenString });
             }
             catch (Exception ex)
             {
@@ -60,50 +299,24 @@ namespace bienesoft.Controllers
             }
         }
 
-        // Método para restablecer la contraseña
-    [HttpPost("ResetPassUser")]
-    public async Task<IActionResult> ResetPassword(ResetPassUser user)
-    {
-    try
-    {
-        // Verificar si el correo existe en la base de datos
-        var userExists = await _UserServices.UserExistsByEmail(user.Email);
-        
-        if (!userExists)
-        {
-            return NotFound("El correo electrónico no está registrado.");
-        }
-
-        // Si el correo existe, enviar el correo
-        var emailResponse = await GeneralFunction.SendEmail(user.Email);
-
-        if (!emailResponse.Status)
-        {
-            return BadRequest(emailResponse.Message);
-        }
-
-        return Ok("Correo de restablecimiento de contraseña enviado correctamente.");
-    }
-    catch (Exception ex)
-    {
-        GeneralFunction.Addlog(ex.ToString());
-        return StatusCode(500, ex.ToString());
-    }
-    }
-
-
-        [HttpPost("CreateUser")]
-        public IActionResult AddUser(User user)
+        [HttpPost("ResetPassUser")]
+        public async Task<IActionResult> ResetPassword(ResetPassUser user)
         {
             try
             {
-                var error = GeneralFunction.ValidModel(user);
-                if (error.Length == 0)
+                var userExists = await _UserServices.UserByEmail(user.Email);
+                if (!userExists)
                 {
-                    _UserServices.AddUser(user);
-                    return Ok(new { message = "Usuario creado con éxito" });
+                    return NotFound("El correo electrónico no está registrado.");
                 }
-                return BadRequest(error);
+
+                var emailResponse = await GeneralFunction.SendEmail(user.Email);
+                if (!emailResponse.Status)
+                {
+                    return BadRequest(emailResponse.Message);
+                }
+
+                return Ok("Correo de restablecimiento de contraseña enviado correctamente.");
             }
             catch (Exception ex)
             {
@@ -112,22 +325,47 @@ namespace bienesoft.Controllers
             }
         }
 
-        [HttpGet("AllUsers")]
-        public ActionResult<IEnumerable<User>> AllUsers()
-        {
-            return Ok(_UserServices.AllUser());
-        }
-
-        [HttpGet("GetUser/{id}")]
-        public IActionResult GetUser(int id)
+        [AllowAnonymous]
+        [HttpPost("CreateUser")]
+        public async Task<IActionResult> CreateUser(User user)
         {
             try
             {
-                var user = _UserServices.GetById(id);
+                string salt = BCrypt.Net.BCrypt.GenerateSalt();
+                user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(user.HashedPassword + salt);
+                user.Salt = salt;
+                user.TokJwt = "";
+
+                await _UserServices.AddUserAsync(user);
+                return Ok(new { message = "Usuario creado con éxito" });
+            }
+            catch (Exception ex)
+            {
+                GeneralFunction.Addlog(ex.ToString());
+                return StatusCode(500, ex.ToString());
+            }
+        }
+
+        [Authorize]
+        [HttpGet("AllUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> AllUsers()
+        {
+            var users = await _UserServices.AllUsersAsync();
+            return Ok(users);
+        }
+
+        [Authorize]
+        [HttpGet("GetUser/{id}")]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            try
+            {
+                var user = await _UserServices.GetByIdAsync(id);
                 if (user == null)
                 {
                     return NotFound("No se encontró el usuario");
                 }
+
                 return Ok(user);
             }
             catch (Exception ex)
@@ -137,23 +375,20 @@ namespace bienesoft.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("DeleteUser/{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var userToDelete = _UserServices.GetById(id);
+                var userToDelete = await _UserServices.GetByIdAsync(id);
                 if (userToDelete == null)
                 {
                     return NotFound($"El usuario con el ID {id} no se pudo encontrar");
                 }
 
-                _UserServices.Delete(id);
+                await _UserServices.DeleteAsync(id);
                 return Ok("Usuario eliminado con éxito");
-            }
-            catch (KeyNotFoundException knFEx)
-            {
-                return NotFound(knFEx.Message);
             }
             catch (Exception ex)
             {
@@ -162,8 +397,9 @@ namespace bienesoft.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("UpdateUser")]
-        public IActionResult Update(User user)
+        public async Task<IActionResult> Update(User user)
         {
             if (user == null)
             {
@@ -172,16 +408,8 @@ namespace bienesoft.Controllers
 
             try
             {
-                _UserServices.UpdateUser(user);
+                await _UserServices.UpdateUserAsync(user);
                 return Ok("Usuario actualizado exitosamente");
-            }
-            catch (ArgumentNullException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -190,28 +418,28 @@ namespace bienesoft.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("AllUsersInRange")]
-        public ActionResult<IEnumerable<User>> GetAllInRange(int inicio, int fin)
+        public async Task<ActionResult<IEnumerable<User>>> GetAllInRange(int inicio, int fin)
         {
             try
             {
-                // Validar los parámetros.
                 if (inicio < 1 || fin < inicio)
                 {
                     return BadRequest("Los parámetros de rango son inválidos.");
                 }
 
-                var usersInRange = _UserServices.AllUser()
-                    .Skip(inicio - 1)
-                    .Take(fin - inicio + 1)
-                    .ToList();
+                var usersInRange = await _UserServices.AllUsersAsync();
 
-                if (!usersInRange.Any())
+                // Paginación
+                var paginatedUsers = usersInRange.Skip(inicio - 1).Take(fin - inicio + 1).ToList();
+
+                if (!paginatedUsers.Any())
                 {
                     return NotFound("No se encontraron usuarios en el rango especificado.");
                 }
 
-                return Ok(usersInRange);
+                return Ok(paginatedUsers);
             }
             catch (Exception ex)
             {

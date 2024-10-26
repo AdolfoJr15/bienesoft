@@ -222,7 +222,7 @@ CREATE TABLE `program` (
 
 LOCK TABLES `program` WRITE;
 /*!40000 ALTER TABLE `program` DISABLE KEYS */;
-INSERT INTO `program` VALUES (1,'ADSO',1),(3,'argeol',2);
+INSERT INTO `program` VALUES (1,'ADSO',1),(3,'argeol',2),(4,'tecnologia',2);
 /*!40000 ALTER TABLE `program` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,18 +235,14 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `User_Id` int NOT NULL,
-  `Email` varchar(45) NOT NULL,
-  `Password` varchar(250) NOT NULL,
-  `Session_Count` int NOT NULL,
-  `Tok_JWT` varchar(250) DEFAULT NULL,
-  `Blockade` tinyint(1) DEFAULT '0',
-  `Leap` varchar(250) DEFAULT NULL,
-  `User_Type` varchar(45) NOT NULL,
-  `User_Name` varchar(250) NOT NULL,
-  `User_Surname` varchar(250) NOT NULL,
-  `Phone_Number` varchar(20) NOT NULL,
-  `Date_ Birth` date NOT NULL,
-  `Asset` tinyint(1) DEFAULT '0',
+  `Email` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `HashedPassword` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `Salt` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `SessionCount` int NOT NULL DEFAULT '0',
+  `TokJwt` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `Blockade` bit(1) NOT NULL DEFAULT b'0',
+  `UserType` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `Asset` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`User_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -257,6 +253,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'guiopinedaargeol79@gmailcom','$2a$11$LwgfDrNGwgfby729DMn/f.qSm8jrR482kD4eWJgUCdW7tq.PaEW7O','$2a$11$wk34anpVCoBeIAgi692SHe',0,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjoiZ3Vpb3BpbmVkYWFyZ2VvbDc5QGdtYWlsY29tIiwibmJmIjoxNzI5OTc5OTIwLCJleHAiOjE3Mjk5ODM1MjAsImlhdCI6MTcyOTk3OTkyMH0.F3jC-4U8H0MrfL_iIApwGSLS-hhC0fhMZN-py3cbhR4',_binary '\0','admin',_binary ''),(2,'argeol@gmail.com','$2a$11$fF0aPXAKR0.e/W1LIlDYD.N3sCTrHm/PD/jUVI4RxOHS2ZVeiYiMK','$2a$11$SDKKWnW2Q7AcC2UCJpV3pe',2,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjoiYXJnZW9sQGdtYWlsLmNvbSIsIm5iZiI6MTcyOTk3NzU4NSwiZXhwIjoxNzI5OTgxMTg1LCJpYXQiOjE3Mjk5Nzc1ODV9.Bz6tkO5qAPeJzqAlrXpNWsLvCfCxMLuwK23QFRZlS9c',_binary '','admin',_binary ''),(3,'guio@gmail.com','$2a$11$qk4l/U6yjR2vlGSigJZj8O87yh/XgGfWskg5.2tHF7QEp8Zgzvbbi','$2a$11$fH3atSdLdoRmOfaSHbWFT.',1,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjoiZ3Vpb0BnbWFpbC5jb20iLCJuYmYiOjE3Mjk5ODAwMDUsImV4cCI6MTcyOTk4MzYwNSwiaWF0IjoxNzI5OTgwMDA1fQ.skOMocaja4CgCiUK9zmIYpVqVS_iIYNCkloLgCxO7bY',_binary '\0','aprendiz',_binary ''),(4,'user@example.com','$2a$11$fLXKciDMszDZVv63jaQUb.NfiKDHuYLZojsPJS3fCMQK51C/S2yk2','$2a$11$YPejzRmIyBEuOaLxqXpoOu',0,'',_binary '\0','string',_binary ''),(5,'user@example.com','$2a$11$BpexvpVxT7FJBfOVhVUhsuZ3W0F7ARS4nM9x9gPQUuZ2w0ouRnm2C','$2a$11$mO8hbtfKr27HI9tBYgk4V.',0,'',_binary '\0','string',_binary ''),(7,'argeol@gmail.com','$2a$11$Ik9T1svGR3sd1xHEEjpSlO8.YxjS3Jt6HjYXG/lr6yMTLgW86ocIq','$2a$11$loCzeV6dgUULvJ3YPFSmsO',2,'',_binary '','admin',_binary ''),(10,'guio@example.com','$2a$11$G9L1K/f8CCegnkfcVZYKPu4W6ocynG.qwlymCeV2IsOQXhAiD/OzO','$2a$11$uI5bt7WZKohtuIpsswmUbO',0,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjoiZ3Vpb0BleGFtcGxlLmNvbSIsIm5iZiI6MTcyOTk4MTcxMCwiZXhwIjoxNzI5OTg1MzEwLCJpYXQiOjE3Mjk5ODE3MTB9.yzy_rPkpSv2Enbqw2TS0ydKAIYkOHWb_NGmLCDSUKwI',_binary '\0','string',_binary '');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -269,4 +266,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-24  7:13:03
+-- Dump completed on 2024-10-26 17:34:26

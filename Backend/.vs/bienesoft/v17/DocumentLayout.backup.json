@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Bienesoft\\bienesoft\\Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|c:\\bienesoft\\bienesoft\\backend\\bienesoft\\controllers\\user.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|solutionrelative:bienesoft\\controllers\\user.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|c:\\bienesoft\\bienesoft\\backend\\bienesoft\\middleware\\jwtmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|solutionrelative:bienesoft\\middleware\\jwtmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|c:\\bienesoft\\bienesoft\\backend\\bienesoft\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|solutionrelative:bienesoft\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|c:\\bienesoft\\bienesoft\\backend\\bienesoft\\funcions\\general.functions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62887389-4358-447D-9206-D373BD470CDF}|bienesoft\\bienesoft.csproj|solutionrelative:bienesoft\\funcions\\general.functions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "General.Functions.cs",
+              "DocumentMoniker": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Funcions\\General.Functions.cs",
+              "RelativeDocumentMoniker": "bienesoft\\Funcions\\General.Functions.cs",
+              "ToolTip": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Funcions\\General.Functions.cs",
+              "RelativeToolTip": "bienesoft\\Funcions\\General.Functions.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T22:20:36.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Program.cs",
+              "RelativeDocumentMoniker": "bienesoft\\Program.cs",
+              "ToolTip": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Program.cs*",
+              "RelativeToolTip": "bienesoft\\Program.cs*",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAABMAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T21:47:58.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "User.Controller.cs",
+              "DocumentMoniker": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Controllers\\User.Controller.cs",
+              "RelativeDocumentMoniker": "bienesoft\\Controllers\\User.Controller.cs",
+              "ToolTip": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Controllers\\User.Controller.cs",
+              "RelativeToolTip": "bienesoft\\Controllers\\User.Controller.cs",
+              "ViewState": "AgIAAAgBAAAAAAAAAAAqwC0BAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T21:43:55.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JwtMiddleware.cs",
+              "DocumentMoniker": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Middleware\\JwtMiddleware.cs",
+              "RelativeDocumentMoniker": "bienesoft\\Middleware\\JwtMiddleware.cs",
+              "ToolTip": "C:\\Bienesoft\\bienesoft\\Backend\\bienesoft\\Middleware\\JwtMiddleware.cs*",
+              "RelativeToolTip": "bienesoft\\Middleware\\JwtMiddleware.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T21:42:52.221Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -20,17 +20,6 @@ namespace Bienesoft.Models
             return _context.program.ToList(); // Asegúrate de que 'program' es el DbSet correcto en tu contexto.
         }
 
-        public void AddProgram(ProgramModel program)
-        {
-            if (program == null)
-            {
-                throw new ArgumentNullException(nameof(program), "El modelo de Program no puede ser nulo.");
-            }
-
-            _context.program.Add(program); // Asegúrate de que 'program' es el DbSet correcto.
-            _context.SaveChanges();
-        }
-
         public ProgramModel GetById(int id)
         {
             var program = _context.program.FirstOrDefault(p => p.Program_Id == id);
@@ -77,6 +66,13 @@ namespace Bienesoft.Models
             existingProgram.File_Id = program.File_Id; // Actualiza otros campos según sea necesario.
 
             _context.SaveChanges();
+        }
+        public void AddProgram(ProgramModel program)
+        {
+            if (program == null)
+            {
+                throw new ArgumentNullException(nameof(program), "El modelo de Program no puede ser nulo.");
+            }
         }
     }
 }

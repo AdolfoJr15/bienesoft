@@ -1,81 +1,99 @@
 ﻿using bienesoft.models;
 using bienesoft.Models;
-using Bienesoft.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace bienesoft.Services
 {
     public class UserServices
     {
         private readonly AppDbContext _context;
+
         public UserServices(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<bool> UserExistsByEmail(string email)
+       
+
+        public async Task<IEnumerable<User>> AllUsersAsync()
         {
-            return await _context.user.AnyAsync(u => u.Email == email);
+            return await _context.user.ToListAsync();
         }
-        public IEnumerable<User> AllUser()
+
+        public async Task AddUserAsync(User user)
         {
-            return _context.user.ToList();
+            await _context.user.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
-        public void AddUser(User user)
+
+        public async Task<User> GetByIdAsync(int id)
         {
-            _context.user.Add(user);
-            _context.SaveChanges();
+            return await _context.user.FirstOrDefaultAsync(p => p.User_Id == id);
         }
-        public User GetById(int id)
+
+        public async Task DeleteAsync(int id)
         {
-            return _context.user.FirstOrDefault(p => p.User_Id == id);
-        }
-        public void Delete(int id)
-        {
-            var user = _context.user.FirstOrDefault(p => p.User_Id == id);
+            var user = await GetByIdAsync(id);
             if (user != null)
             {
                 try
                 {
                     _context.user.Remove(user);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("No Se Pudo Eliminar El User" + ex.Message);
+                    throw new Exception("No se pudo eliminar el usuario: " + ex.Message);
                 }
             }
             else
             {
-                throw new KeyNotFoundException("El User Con El Id" + id + "No Se Pudo Encontrar");
+                throw new KeyNotFoundException("El usuario con el ID " + id + " no se pudo encontrar.");
             }
         }
-        public void UpdateUser(User user)
+
+        public async Task UpdateUserAsync(User user)
         {
             if (user == null)
             {
-                throw new ArgumentNullException(nameof(User), "El modelo de User es nulo");
+                throw new ArgumentNullException(nameof(user), "El modelo de usuario es nulo");
             }
 
-            var existingUser = _context.user.Find(user.User_Id);
+            // Busca el usuario existente usando Where
+            var existingUser = await _context.user
+                .Where(u => u.User_Id == user.User_Id)
+                .FirstOrDefaultAsync();
+
             if (existingUser == null)
             {
-                throw new ArgumentException("User no encontrado");
+                throw new ArgumentException("Usuario no encontrado");
             }
 
-            existingUser.User_Name = user.User_Name;
-            // Actualiza otros campos según sea necesario
+            // Asignar todas las propiedades del objeto user al objeto existingUser
+            // Puedes usar AutoMapper o simplemente asignar manualmente
+            existingUser.Email = user.Email;
+            existingUser.HashedPassword = user.HashedPassword;
+            existingUser.Salt = user.Salt;
+            existingUser.SessionCount = user.SessionCount;
+            existingUser.TokJwt = user.TokJwt;
+            existingUser.Blockade = user.Blockade;
+            existingUser.UserType = user.UserType;
+            existingUser.Asset = user.Asset;
 
-            _context.SaveChanges();
+            // Guarda los cambios en el contexto
+            await _context.SaveChangesAsync();
         }
-        public IEnumerable<User> GetAttendantsByCriteria(string criteria)
+
+        // Nuevo método para obtener un usuario por correo electrónico
+        public async Task<User> GetByEmailAsync(string email)
         {
-            return _context.user
-                .Where(a => a.User_Name.Contains(criteria)) // Puedes modificar esta línea según el criterio
-                .ToList();
+            return await _context.user.FirstOrDefaultAsync(u => u.Email == email);
         }
-
+        public async Task<bool> UserByEmail(string email)
+        {
+            return await _context.user.AnyAsync(u => u.Email == email);
+        } 
     }
-
 }
-

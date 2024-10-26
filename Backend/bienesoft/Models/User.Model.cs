@@ -1,54 +1,54 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bienesoft.models
 {
+        [Table("user", Schema = "bienesoft")]
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DisplayName("User_Id")]
         public int User_Id { get; set; }
 
-        [Required(ErrorMessage = "El campo es requerido")]
-        [EmailAddress(ErrorMessage = "Formato de correo electrónico inválido")]
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [StringLength(100, ErrorMessage = "El campo {0} tiene un límite de caracteres de {1}")]
+        [EmailAddress(ErrorMessage = "El campo {0} no es una dirección de correo electrónico válida")]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es requerida")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [DisplayName("Cantidad de Sesiones")]
-        [Required(ErrorMessage = "Campo {0} es requerido")]
-        [Range(0, int.MaxValue, ErrorMessage = "El campo {0} debe ser un número positivo")]
-        public int Session_Count { get; set; }
-
-        [DisplayName("Token")]
+        [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(255, ErrorMessage = "El campo {0} tiene un límite de caracteres de {1}")]
-        public string Tok_JWT { get; set; }
+        [DisplayName("Hashed Password")]
+        public string HashedPassword { get; set; }
 
-        [DisplayName("Bloqueo")]
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [StringLength(255, ErrorMessage = "El campo {0} tiene un límite de caracteres de {1}")]
+        [DisplayName("Salt")]
+        public string Salt { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Range(0, int.MaxValue, ErrorMessage = "El campo {0} debe ser un valor positivo")]
+        [DefaultValue(0)]
+        [DisplayName("Session Count")]
+        public int SessionCount { get; set; }
+
+        [StringLength(255, ErrorMessage = "El campo {0} tiene un límite de caracteres de {1}")]
+        [DisplayName("Token JWT")]
+        public string TokJwt { get; set; }
+
+        [DefaultValue(false)]
+        [DisplayName("Blocked")]
         public bool Blockade { get; set; }
 
-        public string Leap { get; set; }
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [StringLength(50, ErrorMessage = "El campo {0} tiene un límite de caracteres de {1}")]
+        [DisplayName("User Type")]
+        public string UserType { get; set; }
 
-        [DisplayName("Tipo de Usuario")]
-        [Required(ErrorMessage = "Campo {0} es requerido")]
-        public string User_Type { get; set; }
-
-        [DisplayName("Nombre")]
-        [Required(ErrorMessage = "Campo {0} es requerido")]
-        public string User_Name { get; set; }
-
-        [DisplayName("Apellido")]
-        public string User_Surname { get; set; }
-
-        [DisplayName("Número de Teléfono")]
-        [Phone(ErrorMessage = "Formato de teléfono inválido")]
-        public string Phone_Number { get; set; }
-
-        [DisplayName("Fecha de Nacimiento")]
-        [DataType(DataType.Date)]
-        public string Date_Birth { get; set; }
-
+        [DefaultValue(true)]
+        [DisplayName("Active")]
         public bool Asset { get; set; }
     }
 
@@ -58,5 +58,10 @@ namespace bienesoft.models
         [EmailAddress(ErrorMessage = "Formato de correo electrónico inválido")]
         public string Email { get; set; }
     }
-}
 
+    public class LoginUser
+    {
+        public string Email { get; set; }
+        public string HashedPassword { get; set; }
+    }
+}
